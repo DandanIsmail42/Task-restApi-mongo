@@ -19,28 +19,17 @@ const view =  (req, res) => {
 
 const store =  (req, res) => {
     const {users_id, name, price, stock, status} = req.body;
-    const image = req.file;
-    if(image) {
-        const target = path.join(__dirname, '../../uploads', image.originalname);
-      
-        fs.renameSync(image.path, target);
-        db.collection('products').insertOne({users_id, name, price, stock, status, image_url: `localhost:3000/public/${image.originalname}`})
-        .then(result => res.send(result))
-        .catch(error => (error));
-    }
+    db.collection('products').insertOne({users_id, name, price, stock, status})
+    .then(result => res.send(result))
+    .catch(error => (error));
     }
 
     const update = (req, res) => {
     const {users_id, name, price, stock, status} = req.body;
     const {id} = req.params.id;
-    const image = req.file;
-    if(image) {
-        const target = path.join(__dirname, '../../uploads', image.originalname);
-      
-        fs.renameSync(image.path, target);
-        db.collection('products').updateOne({id, name:name, price:price, stock:stock, status:status, image_url: `localhost:3000/public/${image.originalname}`})
-        .then(result => res.send(result))
-        .catch(error => (error));
-    }
+   
+    db.collection('products').updateOne({id, name: name, price: price, stock: stock, status: status})
+    .then(result => res.send(result))
+    .catch(error => (error));
 }
 module.exports = { index, view, store, update }
