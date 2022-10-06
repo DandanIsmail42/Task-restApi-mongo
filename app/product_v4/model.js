@@ -17,9 +17,6 @@ const productSchema = mongoose.Schema({
     status: {
         type: Boolean,
         default: true
-    },
-    image_url: {
-        type: String
     }
 });
 

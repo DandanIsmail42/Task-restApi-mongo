@@ -1,19 +1,18 @@
 require('./config/mongoose');
 const express = require('express');
 const app = express();
-// const productRouter = require('./app/product/routes');
-// const productRouterV2 = require('./app/product_v2/routes');
-// const productRouter_v3 = require('./app/product_v3/routes');
+const port = process.env.PORT || 3000
+
+const productRouter_v3 = require('./app/product_v3/routes');
 const productRouter_v4 = require('./app/product_v4/routes');
 const logger = require('morgan');
-const path = require('path');
+
 
 app.use(logger('dev'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use('/public', express.static(path.join(__dirname, 'uploads')));
-// app.use('/api/v1', productRouter);
-// app.use('/api/v2', productRouterV2);
-// app.use('/api/v3', productRouter_v3);
+
+
+app.use('/api/v3', productRouter_v3);
 app.use('/api/v4', productRouter_v4);
-app.listen(3000, () => console.log('server: http://localhost:3000'));
+app.listen(port, () => console.log('server: http://localhost:3000'));
