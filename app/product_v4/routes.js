@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const productControler = require('./controler');
 
-router.get('/product', productControler.index);
-router.get('/product/:id', productControler.view);
-router.post('/product', productControler.store);
-router.put('/product/:id', productControler.update);
-router.delete('/product/:id', productControler.deleteProduct);
+router.get('/chatting', productControler.index);
+router.get('/chatting/:id', productControler.view);
+router.post('/chatting', productControler.store);
+router.put('/chatting/:id', productControler.update);
+router.delete('/chatting/:id', productControler.deleteProduct);
 module.exports = router;

@@ -1,44 +1,37 @@
-const Product = require('./model');
-const fs = require('fs');
-const path = require('path');
 
+const db = require('../../config/mongoose');
 
-const index =  (req, res) => {
-    Product.find()
-    .then(result => res.send(result))
-    .catch(error => (error));
+let messageDb = null;
+(async () => {
+    messageDb = (await db()).message;
+})();
+
+const index =  async (req, res) => {
+   const messages = await messageDb.find();
+   res.json(messages);
 }
 
-const view =  (req, res) => {
-    const {id} = req.params.id;
-    Product.findOne({id})
-    .then(result => res.send(result))
-    .catch(error => (error));
+const view = async (req, res) => {
+    const {id} = await req.params.id;
+    const messages = await messageDb.findOne({id})
+    res.json(messages);
 }
 
 
-const store = (req, res) => {
-    const { name, price, stock, status} = req.body;
-    Product.create({name, price, stock, status})
-    .then(result => res.send(result))
-    .catch(error => (error));
+const store = async (req, res) => {
+    const messages = await messageDb.create({sender, receiver, content})
+    res.json(messages);
 }
 
-const update = (req, res) => {
-   
-    Product.updateOne({_id: req.params.id}, {name: req.body.name,
-        price: req.body.price,
-        stock: req.body.stock,
-        status: req.body.status})
-       .then(result => res.send(result))
-       .catch(error => (error));
+const update = async (req, res) => {
+    const messages = await messageDb.update({sender, receiver, content})
+    res.json(messages);
 }
 
-const deleteProduct = (req, res) => {
-    const image = req.file;
-    Product.deleteOne({_id: req.params.id})
-    .then(result => res.send(result))
-    .catch(error => (error));
+const deleteProduct = async (req, res) => {
+    const {id} = await req.params.id;
+    const messages = await messageDb.delete({id})
+    res.json(messages);
 }
 
 
