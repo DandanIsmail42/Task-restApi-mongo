@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const database = process.env.MONGO_URI || 'mongodb://ismail:ismail@localhost:27017/dandan-native?authSource=admin'
+const database = process.env.MONGO_URI || 'mongodb://ismail:ismail@localhost:27017/admin?authSource=admin'
 mongoose.connect(database, {useUnifiedTopology: true,
 useNewUrlParser: true
 });

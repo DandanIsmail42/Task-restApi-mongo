@@ -38,3 +38,6 @@ app.use(express.json());
 app.use('/api/v3', productRouter_v3);
 app.use('/api/v4', productRouter_v4);
 app.listen(port, () => console.log('server: http://localhost:3000'));
+
+
+
